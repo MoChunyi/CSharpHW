@@ -1,0 +1,94 @@
+﻿<Window x:Class="CSharpHW.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSharpHW"
+        xmlns:zedgraph="clr-namespace:ZedGraph;assembly=ZedGraph"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Viewbox >
+        <Grid Height="450" Width="800">
+            <ComboBox x:Name="ComboBox1"  Margin="439,40,0,0" VerticalAlignment="Top"  Width="105" HorizontalAlignment="Left"  SelectedIndex="0">
+                <ComboBoxItem Content="选择串口名称" Visibility="Collapsed"></ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="ComboBox2"  Margin="439,80,0,0" VerticalAlignment="Top"  Width="105" HorizontalAlignment="Left"  SelectedIndex="0">
+                <ComboBoxItem Content="选择通讯速率" Visibility="Collapsed"></ComboBoxItem>
+            </ComboBox>
+            <Button x:Name ="Button_Open" Content="连接" HorizontalAlignment="Left"  Margin="439,125,0,0" VerticalAlignment="Top"  Width="43" Click="Button_Open_Click" RenderTransformOrigin="0.5,0.031" />
+            <Button x:Name ="Button_Closes" Content="断开" HorizontalAlignment="Left" Margin="498,125,0,0" VerticalAlignment="Top" Width="46" Click="Button_Closes_Click" />
+            <TextBox Name ="openOrCloseMessage" Margin="408,170,225,255" RenderTransformOrigin="0.554,-0.74" BorderThickness="0"></TextBox>
+            <Label Content="显示温度" HorizontalAlignment="Left" Margin="517,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,-0.011"/>
+            <TextBox Name="tempBox" HorizontalAlignment="Left" Margin="580,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="67" Height="23" />
+            <Label Content="显示光强" HorizontalAlignment="Left" Margin="661,201,0,0" VerticalAlignment="Top"/>
+            <TextBox Name ="lightBox" HorizontalAlignment="Left" Margin="724,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Height="23"/>
+            <WindowsFormsHost Margin="520,230,0,60">
+                <zedgraph:ZedGraphControl x:Name="zedGraphControl1"/>
+            </WindowsFormsHost>
+            <Label Content="红灯" HorizontalAlignment="Left" Margin="560,5,0,0" VerticalAlignment="Top"/>
+            <Label Content="绿灯" HorizontalAlignment="Left" Margin="560,35,0,0" VerticalAlignment="Top"/>
+            <Label Content="黄灯" HorizontalAlignment="Left" Margin="560,65,0,0" VerticalAlignment="Top"/>
+            <Label Content="蓝灯" HorizontalAlignment="Left" Margin="560,95,0,0" VerticalAlignment="Top"/>
+            <Label Content="白灯" HorizontalAlignment="Left" Margin="560,125,0,0" VerticalAlignment="Top"/>
+            <Slider Name ="redValue" Width="150" IsSnapToTickEnabled="True" Maximum="255" AutoToolTipPlacement="BottomRight"  TickPlacement="BottomRight" Orientation="Horizontal" HorizontalAlignment="Left" Margin="600,10,0,0" VerticalAlignment="Top" ValueChanged="redValue_ValueChanged"/>
+            <Slider Name ="greenValue" Width="150" IsSnapToTickEnabled="True" Maximum="255" AutoToolTipPlacement="BottomRight" TickPlacement="BottomRight" Orientation="Horizontal" HorizontalAlignment="Left" Margin="600,40,0,0" VerticalAlignment="Top" ValueChanged="greenValue_ValueChanged"/>
+            <Slider Name ="yellowValue" Width="150" IsSnapToTickEnabled="True" Maximum="255" AutoToolTipPlacement="BottomRight" TickPlacement="BottomRight" Orientation="Horizontal" HorizontalAlignment="Left" Margin="600,70,0,0" VerticalAlignment="Top" ValueChanged="yellowValue_ValueChanged"/>
+            <Slider Name ="blueValue" Width="150" IsSnapToTickEnabled="True" Maximum="255" AutoToolTipPlacement="BottomRight" TickPlacement="BottomRight" Orientation="Horizontal" HorizontalAlignment="Left" Margin="600,100,0,0" VerticalAlignment="Top" ValueChanged="blueValue_ValueChanged"/>
+            <Slider Name ="whiteValue" Width="150" IsSnapToTickEnabled="True" Maximum="255" AutoToolTipPlacement="BottomRight" TickPlacement="BottomRight" Orientation="Horizontal" HorizontalAlignment="Left" Margin="600,130,0,0" VerticalAlignment="Top" ValueChanged="whiteValue_ValueChanged"/>
+            <Ellipse Width="35" Margin="697,158,68,257" Height="35" Stroke="Black">
+                <Ellipse.Fill>
+                    <SolidColorBrush x:Name="Argb"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Button Name ="ledControlButton" Content="发送" HorizontalAlignment="Left" Margin="600,170,0,0" VerticalAlignment="Top" Width="75" Click="ledControlButton_Click"/>
+            <Button Content="log开始" HorizontalAlignment="Left" Margin="547,415,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.445,3.521" Click="Button_Click_2"/>
+            <Button Content="log结束" HorizontalAlignment="Left" Margin="680,415,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.482,2.183" Click="Button_Click_3"/>
+            <GroupBox Header="FunctionCode:0x10" HorizontalAlignment="Left" Height="217" Margin="257,201,0,0" VerticalAlignment="Top" Width="217">
+                <Canvas HorizontalAlignment="Left" Height="192" Margin="0,0,-3,0" VerticalAlignment="Top" Width="207">
+                    <Label Content="SlaveAddress" Canvas.Left="10" Canvas.Top="10" RenderTransformOrigin="-0.011,-0.657"/>
+                    <TextBox Name ="SlaveAddress_Write" Height="23" Canvas.Left="118" TextWrapping="Wrap" Text="" Canvas.Top="10" Width="56" RenderTransformOrigin="0.747,0.462"/>
+                    <Label Content="StartAddress" Canvas.Left="10" Canvas.Top="35" RenderTransformOrigin="-0.011,-0.657"/>
+                    <TextBox Name = "StartAddress_Write" Height="23" Canvas.Left="118" TextWrapping="Wrap" Text="" Canvas.Top="35" Width="56"/>
+                    <Label Content="NumOfRegisters" Canvas.Left="10" Canvas.Top="60" RenderTransformOrigin="-0.011,-0.657"/>
+                    <TextBox Name ="NumOfRegisters_Write" Height="23" Canvas.Left="118" TextWrapping="Wrap" Text="" Canvas.Top="60" Width="56"/>
+                    <Label Content="FunctionCode" Canvas.Left="12" Canvas.Top="85" RenderTransformOrigin="-0.011,-0.657"/>
+                    <TextBox Name ="FunctionCode_Write" Height="23" Canvas.Left="118" TextWrapping="Wrap" Text="016" Canvas.Top="85" Width="56"/>
+                    <Label Content="Date" Canvas.Left="12" Canvas.Top="122" RenderTransformOrigin="-0.011,-0.657" Width="42"/>
+                    <TextBox Name ="Data_Write" Height="23" Canvas.Left="57" TextWrapping="Wrap" Text="" Canvas.Top="124" Width="140"/>
+                    <Button Content="Write" Canvas.Left="135" Canvas.Top="160" Width="64" Height="26" RenderTransformOrigin="0.635,1.017" FontWeight="Heavy" FontSize="18" Click="Button_Click_1"/>
+                    <GroupBox Header="ReceCRC" Height="35" Canvas.Left="66" Canvas.Top="152" Width="67" RenderTransformOrigin="1.136,0.415" FontSize="9">
+                        <TextBox Name ="ReceiveCRC_Write" HorizontalAlignment="Left" Height="20" Margin="0,0,0,-4" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" FontSize="11"/>
+                    </GroupBox>
+                    <GroupBox Header="DataCacuCRC" Height="35" Canvas.Top="152" Width="67" RenderTransformOrigin="1.136,0.415" FontSize="8">
+                        <TextBox x:Name ="DataCRC_Write" HorizontalAlignment="Left" Height="20" Margin="0,0,0,-4" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" FontSize="11"/>
+                    </GroupBox>
+                </Canvas>
+            </GroupBox>
+            <GroupBox Header="FunctionCode:0x03" HorizontalAlignment="Left" Height="217" Margin="20,205,0,0" VerticalAlignment="Top" Width="217">
+                <Canvas HorizontalAlignment="Left" Height="192" Margin="0,0,-3,0" VerticalAlignment="Top" Width="207">
+                    <Label Content="SlaveAddress" Canvas.Left="10" Canvas.Top="10" RenderTransformOrigin="-0.011,-0.657"/>
+                    <TextBox Name ="SlaveAddress_Read" Height="23" Canvas.Left="118" TextWrapping="Wrap" Text="" Canvas.Top="10" Width="56" RenderTransformOrigin="0.747,0.462"/>
+                    <Label Content="StartAddress" Canvas.Left="10" Canvas.Top="44" RenderTransformOrigin="-0.011,-0.657"/>
+                    <Label Content="LengthOfData" Canvas.Left="10" Canvas.Top="74" RenderTransformOrigin="-0.011,-0.657"/>
+                    <TextBox Name ="LengthOfData_Read" Height="23" Canvas.Left="118" TextWrapping="Wrap" Text="" Canvas.Top="74" Width="56"/>
+                    <Label Content="FunctionCode" Canvas.Left="10" Canvas.Top="104" RenderTransformOrigin="-0.011,-0.657"/>
+                    <TextBox Name ="FunctionCode_Read" Height="23" Canvas.Left="119" TextWrapping="Wrap" Text="03" Canvas.Top="104" Width="56"/>
+                    <Button Content="Read" Canvas.Left="137" Canvas.Top="152" Width="64" Height="26" RenderTransformOrigin="0.635,1.017" FontWeight="Heavy" FontSize="18" Click="Button_Click"/>
+                    <GroupBox Header="ReceCRC" Height="35" Canvas.Left="67" Canvas.Top="143" Width="67" RenderTransformOrigin="1.136,0.415" FontSize="9">
+                        <TextBox Name ="ReceiveCRC_Read" HorizontalAlignment="Left" Height="20" Margin="0,0,0,-4" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" FontSize="11"/>
+                    </GroupBox>
+                    <TextBox x:Name ="StartAddress_Read" Height="23" Canvas.Left="118" TextWrapping="Wrap" Text="" Canvas.Top="44" Width="56" RenderTransformOrigin="0.747,0.462"/>
+                    <GroupBox Header="DataCacuCRC" Height="35" Canvas.Top="143" Width="67" RenderTransformOrigin="1.136,0.415" FontSize="8">
+                        <TextBox x:Name ="DataCRC_Read" HorizontalAlignment="Left" Height="20" Margin="0,0,0,-4" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50" FontSize="11"/>
+                    </GroupBox>
+                </Canvas>
+            </GroupBox>
+            <GroupBox Header="SendInfo" HorizontalAlignment="Left" Height="195" Margin="20,5,0,0" VerticalAlignment="Top" Width="172" FontWeight="Heavy">
+                <ListView x:Name="ContentOfSend" HorizontalAlignment="Left" Height="168" VerticalAlignment="Top" Width="158" />
+            </GroupBox>
+            <GroupBox Header="ReceiveInfo" HorizontalAlignment="Left" Height="200" Margin="210,5,0,0" VerticalAlignment="Top" Width="193" FontWeight="Heavy">
+                <ListView x:Name ="ContentOfReceive" HorizontalAlignment="Left" Height="179" Margin="0,0,-2.2,-1.4" VerticalAlignment="Top" Width="183" BorderBrush="BlueViolet" />
+            </GroupBox>
+        </Grid>
+    </Viewbox>
+</Window>
